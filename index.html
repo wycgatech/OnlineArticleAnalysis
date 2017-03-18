@@ -1,0 +1,387 @@
+<! doctype html>
+
+<html>
+<head>
+	<title>Online Article Popularity</title>
+	
+	<!-- Styling using external style. Always apply the most general styling rules here since you can 
+	change styling rules of specific items under this part which will override this part of styling -->
+	
+	<link rel="stylesheet" type="text/css" href="link_style.css"/>
+	<style type = "text/css">
+		/* Normal styling */
+		h3 {text-align:center;font-family:Courier New;font-size:25}
+		html, body {
+    		max-width: 100%;
+    		overflow-x: hidden;
+    		margin: 0;
+		}
+		/* Styling using classes */
+		.button_style{color:white;font-family:"Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;font-size:20; padding-left:38px;}
+
+		.empty_space{padding-left:200px;}
+		.job_table{border:2px solid black; border-collapse:collapse; margin:auto;}
+		.job_table th{border:2px solid black;vertical-align:middle; text-align:center;}
+		.job_table td{border:2px solid black;vertical-align:middle; text-align:center;}
+		.other_table{font-size:20;}
+		.other_table th{text-align:left;}
+		.fade_button{float:right;background-color:white;background-image:url('plus.jpg') no-repeat;background-position:center;background-size: 10px 10px;cursor: pointer; border:0px;width:32px;height:30px;}
+		.fade{width:20px;height:20px;}
+		.project_img{width:1000px; height: 600px; position: relative; left: 80px; top: 50px;}
+        .project_img_small{width:300px; height: 200px; position: relative; left: 80px; top: 50px;}
+		.project_para{font-family:Lucida Sans Unicode; font-size:20;position:relative; top:50px;}
+		.coverImg{width: 1290px; height:680px;}
+		.double {border-style: double;padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;}
+		.resizedTextbox {width: 200px; height: 40px; position: relative; left: 15px;font-size: 20px; font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;}
+		/* Styling using IDs */
+		#whole{opacity:0;transition:opacity 1.2s linear 0s;}
+
+		#menu_style{background-color:#333333; width:1280px; padding-top:15px; padding-bottom:15px;}
+
+		#contentStyle1{position:relative;padding-top:50px;padding-left:100px;padding-right:100px;
+				   font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+				   font-size:30; font-weight: 100;
+		}
+		#contentStyle2{position:relative;padding-top:0px;padding-left:100px;padding-right:100px;
+				   font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+				   font-size:30; font-weight: 100;
+		}
+		#ResearchContentStyle{position:relative; top:-600px;padding-left:100px;padding-right:100px;
+				   font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+				   font-size:30; font-weight: 100;
+		}
+        #preContentStyle{position:relative;top: -550px;padding-left:100px;padding-right:100px;
+            font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+            font-size:30; font-weight: 100;
+        }
+        #aboutContentStyle{position:relative;top: -100px;padding-left:100px;padding-right:100px;
+            font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+            font-size:25; font-weight: 100;
+        }
+        #faqContentStyle{position:relative;top: -350px;padding-left:100px;padding-right:100px;
+            font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+            font-size:25; font-weight: 100;
+        }
+		#contentStyle{position:relative;padding-top: 150px;padding-left:100px;padding-right:100px;
+				   font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+				   font-size:30; font-weight: 100;
+		}
+		#backgroundStyle{position:relative;padding-top: 10px;padding-left:100px;padding-right:100px;
+				   font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+				   font-size:24; font-weight: 100;
+		}
+		#background1{
+			position: relative; top: -720px; width: 1290px; height: auto; opacity: 0.1; left: -100px; 
+		}
+		#interestingfactStyle{font-family:Arial, Helvetica, sans-serif; font-size: 15; position: relative; top: 50px;}
+		
+		#btt_img{width:80px;height:80px;}
+		#horizontal{position:relative; left:200px;}
+		#president{opacity: 0.5;position:absolute;top:790px;left:797px;transition:opacity 0.9s linear 0s;}
+		#suggestion{opacity:1;position:absolute;top:2130px;left:1083px;transition:opacity 0.9s linear 0s;}
+		#wbs{opacity:1;position:absolute;top:2015px;left:1050px;transition:opacity 0.9s linear 0s;}
+		#btt_buttom{opacity:1;position:fixed; top:520px; left:1190px;transition:opacity 0.9s linear 0s;}}
+		#target3{filter:alpha(opacity=0); opacity: 0.2; position:relative; left: -100px; width:1290px; height:auto;}
+		
+		/* Styling using child selectors: select any <a> within a <td> */
+		td > a:active{color:grey;}
+		
+	</style>
+	<script language="javascript" type="text/javascript">
+		var whole,t3,pre,yPos,p1,p2,p3,p4,p5;
+		function yScroll1(){
+			pre=document.getElementById('president');
+			yPos=window.pageYOffset;
+			if(yPos < 350 || yPos > 1185){
+				pre.style.opacity="0";
+			}
+			else{
+				pre.style.opacity="1";
+			}
+			t3.style.top = yPos + 'px';
+		}
+		window.addEventListener("scroll", yScroll1,false);
+		
+		function yScroll2(){
+			pre=document.getElementById('suggestion');
+			yPos=window.pageYOffset;
+			if(yPos < 1550 || yPos > 1900){
+				pre.style.opacity="0";
+			}
+			else{
+				pre.style.opacity="1";
+			}
+			t3.style.top = yPos + 'px';
+		}
+		window.addEventListener("scroll", yScroll2,false);
+
+		function yScroll4(){
+			pre=document.getElementById('wbs');
+			yPos=window.pageYOffset;
+			if(yPos < 1550 || yPos > 1900){
+				pre.style.opacity="0";
+			}
+			else{
+				pre.style.opacity="1";
+			}
+			t3.style.top = yPos + 'px';
+		}
+		window.addEventListener("scroll", yScroll4,false);
+		
+		function yScroll3(){
+			pre=document.getElementById('btt_buttom');
+			yPos=window.pageYOffset;
+			if(yPos < 200){
+				pre.style.opacity="0";
+			}
+			else{
+				pre.style.opacity="0.8";
+			}
+			t3.style.top = yPos + 'px';
+		}
+		window.addEventListener("scroll", yScroll3,false);
+
+		function loading(){
+			whole=document.getElementById('whole');
+			p1=document.getElementById('p1');
+			p2=document.getElementById('p2');
+			p3=document.getElementById('p3');
+			p4=document.getElementById('p4');
+			p5=document.getElementById('p5');
+			whole.style.opacity="1";
+			p1.style.display="none";
+			p2.style.display="none";
+			p3.style.display="none";
+			p4.style.display="none";
+			p5.style.display="none";
+		}
+	</script>
+</head>
+
+<body onload="loading()">
+<script language="javascript" type="text/javascript">
+	var fade_in_from = 0;
+	var fade_out_from = 10;
+	function fadeIn(element){
+		var target = document.getElementById(element);
+		target.style.display = "block";
+		var newSetting = fade_in_from / 10;
+		target.style.opacity = newSetting;
+		fade_in_from ++;
+		if(fade_in_from == 10){
+			target.style.opacity = 1;
+			clearTimeout(loopTimer);
+			fade_in_from = 0;
+			return false;
+		}
+		var loopTimer = setTimeout('fadeIn(\''+element+'\')',50);
+	}
+	function fadeOut(element){
+		var target = document.getElementById(element);
+		var newSetting = fade_out_from / 10;
+		target.style.opacity = newSetting;
+		fade_out_from --;
+		if(fade_out_from == 0){
+			target.style.opacity = 0;
+			target.style.display = "none";
+			clearTimeout(loopTimer);
+			fade_out_from = 10;
+			return false;
+		}
+		var loopTimer = setTimeout('fadeOut(\''+element+'\')',50);
+	}
+</script>
+<noscript>
+	<h3>This site requires Javascript</h3>
+</noscript>
+<div id = "whole">
+<img src="./resource/newcover2.png" class="coverImg" title = "Presented by Shenwei, Beishen, Xiaofeng, Yang and Yichuan!"/><a name="top"></a></img>
+<div id="menu_style">
+	<table>
+		<tr>	
+			<td class = "empty_space"></td>
+			<td><a class ="button_style" href = "#whatwedo">WHAT WE DO</a></td>
+			<td><a class ="button_style" href = "#background">BACKGROUND</a></td>
+			<td><a class ="button_style" href = "#indicator">RESEARCH</a></td>
+			<td><a class ="button_style" href = "#prediction">PREDICTION</a></td>
+			<td><a class ="button_style" href = "#faq">FAQ</a></td>
+			<td><a class ="button_style" href = "#about">ABOUT</a></td>
+		</tr>
+	</table>
+</div>
+
+<div id="contentStyle1">
+	<h3><a name = "whatwedo"></a></h3>
+	Still having trouble drawing people's attention to your article ? Deleting a few lines of words, adding one or two pictures in between and pushing back by a few hours to release your article will do the trick ! Now it's time to discover these little secrets that will make your articles more popular online. 
+</div>
+
+<div id="contentStyle">
+	<h3><a name = "background">BACKGROUND</a></h3>
+	<p id = "backgroundStyle">
+	Facebook has recently been accused for spreading fake news about the 2016 U.S presidential election, which is said to influenced the outcome dramatically. Putting aside the political issues involved, this can be seen as a perfect example of the important role social media plays in information sharing. Facebook and twitter together have about 2 billion active users, roughly a quarter of the world's population. Any piece of information being shared can have a huge impact if it successfully draws these people's attention. Therefore, it is meaningful to discover what kinds of news and articles tend to be more popular among social media. <br /><br />
+	While the content of an article is always the decisive factor to determine whether it is popular or not, people often ignore other factors that also influence the popularity of an article. For example, people tend to become impatient when given a relatively long article. Also, a news with pictures, videos and links is more likely to be popular than those which do not have these. These factors can be collected as attributes of articles and be quantified and processed using statistic methods, which generate a great amount of meaningful discoveries, some of which may be quite different than what we used to think. <br /><br />
+	As the final project of CSE 6242 (instructed by Professor Polo Chau), our aim is to analyze and determine important attributes of online articles that will affect their popularity on social media. Specifically, the dataset we are working on is a heterogeneous set of features about article articles published on Mashable in a period of two years, then we make meaningful combination of attributes and anaylze the relationship between them and the number of shares on social network. Moreover, we will learn from the existing datasets and use machine learning to predict the popularity of new articles. The whole website therefore will serve as a comprehensive project for literature analysis and can cater to a large market.  
+ 
+	</p>
+	<img src="./resource/computer.jpg" id="background1">
+</div>
+
+<img align=right id = "wbs" src="./resource/wbs.jpg" height=200px></img>
+<img align=right id = "suggestion" src="./resource/ClickHere.gif" height=72px></img>
+
+<div id="ResearchContentStyle">
+	<h3><a name = "indicator">RESEARCH</a></h3>
+
+    <h4>When should I publish a certain type of article?</h4>
+	Keywords: Releasing /publication time; Category;
+	<hr>
+	<button class="fade_button" onclick="fadeOut('p1')"><img src="./resource/minus.jpg" class="fade"></img></button>
+	<button class="fade_button" onclick="fadeIn('p1')"><img src="./resource/plus.jpg" class="fade"></button>
+	<div id="p1">
+		<img src="./resource/figures/heatmap_avg.png" class="project_img" align=center></img>
+		<p class="project_para">
+			This research reflects the relationship between the popularity of different kinds of articles and the publication time. The result is shown in a heatmap where the x-axis represents categories and y-axis shows different days in a week. 
+			<p id = "interestingfactStyle" class = "double">
+			<b>Interesting facts:</b><br />
+			1. Monday is not as bad as you thought it would be. People get back to work physically but their minds may still enjoy the past weekends. So it is not surprising &nbsp&nbsp&nbsp&nbspto see them grabing every opportunity to take a break and find something interesting on their cell phones. <br />
+			2. Also, Friday is not as good as you thought. You might think people finally get time to read something on a Friday night. Well the truth is: they may not be &nbsp&nbsp&nbsp&nbspsober enough to do that. <br />
+			3. Wednesday could be the most stressful day in a week as people do not even care about what's happenning in the world AT ALL! <br />
+			4. Actually it seems that people do not care about the world at anytime :(  So if my boss asked me to write something about it, I would tag it as a different &nbsp&nbsp&nbsp&nbspcategory. <br />
+			4. No business on Friday. <br />
+			5. "We don't have time to read on Thursday since we have already behind our schedules for this week and the boss is not happy about that."<br />
+			</p>
+		</p>
+        <img src="./resource/figures/heatmap_count.png" class="project_img" align=center></img>
+        <p class="project_para">
+            The graph represents the number of articles published in different categories. x-axis is the category of the article, y-axis is the weekday and z-axis is the number of articles of particular article published on the particular day. The darker the color means larger number of articles.
+            <p id = "interestingfactStyle" class = "double">
+            <b>Interesting facts:</b><br />
+            1. In general, more articles are published on workday than weekend. People usually work on workday to publish articles.<br />
+            2. Compared with all categories, lifestyle and social media category have least number of published articles while world category has most most published articles. People prefer to publish articles related to politics and military news.<br />
+            3. Compared with each weekday, articles of social media category has least publishment on Sunday. Articles of world category has most publishment on Thursday.<br />
+            </p>
+        </p>
+    </div>
+    <br/>
+
+	<h4> Does all potential predictors are independent to each other and relevant to our dependent variable?</h4>
+	Keywords: Correlation
+	<hr>
+	<button class="fade_button" onclick="fadeOut('p5')"><img src="./resource/minus.jpg" class="fade"></img></button>
+	<button class="fade_button" onclick="fadeIn('p5')"><img src="./resource/plus.jpg" class="fade"></button>
+	<div id="p5">
+        <img src="./resource/figures/heatmap_cor.png" class="project_img" align=center></img>
+        <p class="project_para">
+            We plot the heatmap of correlation between each variable to see the dependency. According to the heatmap, each variable has more or less correlation with other variable. The result would be useful for the regression analysis.
+        </p>
+	</div>
+    <br/>
+
+	<h4>Does category and publishing days of news matters?</h4>
+	Keywords: Category; Publication date
+	<hr>
+	<button class="fade_button" onclick="fadeOut('p3')"><img src="./resource/minus.jpg" class="fade"></img></button>
+	<button class="fade_button" onclick="fadeIn('p3')"><img src="./resource/plus.jpg" class="fade"></img></button>
+	<div id="p3">
+        <p class="project_para">
+            We plot the response variable shares by histogram to check its distribution and figured out it is heavily right skewed. Thus, after transforming shares by log function to reduce the skewness, we draw the box plots of log_shares vs categories of articles and log_shares vs  the publishing days respectively as follows,
+        </p>
+        <img src="./resource/figures/boxplot_topic.png" class="project_img" align=center></img>
+        <p class="project_para">
+            Box plot of log_shares vs categories<br />
+            From the box plot, we can tell that the popularity of social media is slightly higher and the median of log_shares of world is lowest, but the general popularity among the different categories are almost the same. The central rectangle spanning from the first quartile to the third quartile is called the interquartile range (IQR). IQR of the category others is largest, since others may included some very different categories of articles and the variance of the log_shares is large, while IQR of World is smallest, which means the log_shares distribution of the category of World is more concentrated and the predictive results will be more reliable.
+        </p>
+        <img src="./resource/figures/boxplot_when.png" class="project_img" align=center></img>
+        <p class="project_para">
+            Box plot of log_shares vs  the publishing days<br />
+            From the box plot, publishing day doesn’t show much influence on shares. It can be a very good news for the website: Mashable enjoys very stable popularity and has a large population of returning readers. We can also learn that the distribution of the log_shares on Sunday is more concentrated and the distributions are all a bit skewed.
+        </p>
+	</div>
+    <br/>
+
+	<h4>Data distribution</h4>
+	Keywords: A lot!
+	<hr>
+	<button class="fade_button" onclick="fadeOut('p4')"><img src="./resource/minus.jpg" class="fade"></img></button>
+	<button class="fade_button" onclick="fadeIn('p4')"><img src="./resource/plus.jpg" class="fade"></img></button>
+	<div id="p4">
+		<img src="./resource/figures/hist_global_subjectivity.png" class="project_img_small" align=center></img>
+		<img src="./resource/figures/hist_global_rate_positive_words.png" class="project_img_small" align=center></img>
+		<img src="./resource/figures/hist_global_rate_negative_words.png" class="project_img_small" align=center></img>
+		<img src="./resource/figures/hist_global_sentiment_polarity.png" class="project_img_small" align=center></img>
+		<img src="./resource/figures/hist_avg_positive_polarity.png" class="project_img_small" align=center></img>
+        <img src="./resource/figures/hist_avg_negative_polarity.png" class="project_img_small" align=center></img>
+        <img src="./resource/figures/hist_kw_avg_max.png" class="project_img_small" align=center></img>
+        <img src="./resource/figures/hist_n_tokens_title.png" class="project_img_small" align=center></img>
+        <img src="./resource/figures/hist_rate_positive_words.png" class="project_img_small" align=center></img>
+        <img src="./resource/figures/hist_rate_negative_words.png" class="project_img_small" align=center></img>
+        <p class="project_para">
+            We plot histograms to check the distribution of ten variables. Some variable distributes uniformly, such as global_subjectivity and global_sentiment_polarity. Some variable distributes partially to one side, such as global_rate_negative_words and rate_positive_words.
+        </p>
+	</div>
+	<h4></h4>
+</div>
+
+<div id="preContentStyle">
+	<h3><a name = "prediction">PREDICTION</a></h3>
+    <form role="form" action="index.php" method="get">
+		Word Count: <input type="text" class="resizedTextbox" name="wordcount"><br>
+		Category: <input type="text" class="resizedTextbox" name="category" value="Business"><br>
+		Publication time: <input type="text" class="resizedTextbox" name="publicationtime" value="Monday"><br>
+		No. of pictures: <input type="text" class="resizedTextbox" name="picture" value="3"><br>
+		No. of ref: <input type="text" class="resizedTextbox" name="reference" value="2"><br>
+		No. of words in topic: <input type="text" class="resizedTextbox" name="topic" value="5"><br>
+		<input type="submit" value="Submit" name="submit">
+        <br>
+
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (isset($_GET['submit'])) {
+
+            $data1 =  $_GET['wordcount'];
+            $data1s = (string)$data1;
+            $data2 =  $_GET['category'];
+            $data2s = (string)$data2;
+            $data3 =  $_GET['publicationtime'];
+            $data3s = (string)$data3;
+            $data4 =  $_GET['picture'];
+            $data4s = (string)$data4;
+            $data5 =  $_GET['reference'];
+            $data5s = (string)$data5;
+            $data6 =  $_GET['topic'];
+            $data6s = (string)$data6;
+            $dataArray = array($data3s,$data1s,$data2s,$data4s,$data5s,$data6s);
+
+
+            $pythonScript = "testlearner.py";
+            $cmd = array("python", $pythonScript, escapeshellarg(json_encode($dataArray)));
+            $cmdText = implode(' ', $cmd);
+
+
+            $result = shell_exec($cmdText);
+            $resultData = json_decode($result, true);
+
+            echo $resultData['result'];
+
+        }
+    }
+    ?>
+</div>
+<!-- <div id="contentStyle">
+	<h3><a name = "prediction">PREDICTION</a></h3>
+</div> -->
+<!-- <img align=right id = "president" src="computer.jpg" height=645px></img> -->
+<div id="faqContentStyle">
+	<h3><a name = "faq">FAQ</a></h3>
+	问组长！
+</div>
+
+<div id="aboutContentStyle">
+	<h3><a name = "about">ABOUT</a></h3>
+	This is a academic project for Data and Visual Analytics course taught by Professor Polo Chau from Georgia Institute of Technology. The main goal of this project is to analyze different objective attributes of an article that would influence readers' attitudes and opinions to the article. As a data analysis project, we focus specifically on attributes that can be quantified (e.g word count, keywords, release time, etc.) and collected and use a set of models and algorithms in statistics and machine learning to analyze the relationship between these attributes and the popularity of these articles (which, in this project, reflected in the number of shares on social networks like Facebook and Twitter). 
+</div>
+<a id = "btt_buttom" href="#top"><img id="btt_img" src="./resource/btt2.png"/></a>
+</div>
+</body>
+</html>
